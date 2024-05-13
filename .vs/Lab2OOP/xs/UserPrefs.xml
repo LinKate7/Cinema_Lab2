@@ -1,0 +1,40 @@
+﻿<Properties StartupConfiguration="{7229F8E9-BD2B-43E0-B93B-DB93C68FBEDC}|https">
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workbench ActiveDocument="Services/GenreService.cs">
+    <Files>
+      <File FileName="models/Film.cs" Line="7" Column="5" />
+      <File FileName="models/Genre.cs" Line="6" Column="29" />
+      <File FileName="models/Hall.cs" />
+      <File FileName="models/Purchase.cs" />
+      <File FileName="models/Ticket.cs" />
+      <File FileName="models/User.cs" />
+      <File FileName="Controllers/GenresController.cs" Line="17" Column="42" />
+      <File FileName="Program.cs" />
+      <File FileName="models/BaseModel.cs" />
+      <File FileName="DTO/GenreDto.cs" Line="7" Column="49" />
+      <File FileName="DTO/FilmDto.cs" Line="1" Column="1" />
+      <File FileName="Services/GenreService.cs" Line="1" Column="15" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Lab2OOP" expanded="True">
+            <Node name="Lab2OOP">
+              <Node name="DTO" expanded="True" />
+              <Node name="Migrations" expanded="True" />
+              <Node name="models" expanded="True" selected="True" />
+              <Node name="Services" expanded="True" />
+              <Node name="appsettings.json" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.Lab2OOP PreferredExecutionTarget="/Applications/Google Chrome.app" />
+</Properties>

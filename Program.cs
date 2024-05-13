@@ -1,10 +1,28 @@
 using Lab2OOP.Components;
+using Lab2OOP.models;
+using Lab2OOP.Services;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddControllers();
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+builder.Services.AddDbContext<TheatreContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddIdentity<User, IdentityRole<Guid>>()
+    .AddEntityFrameworkStores<TheatreContext>()
+    .AddDefaultTokenProviders();
+
+builder.Services.AddScoped<GenreService>();
+builder.Services.AddScoped<FilmService>();
+builder.Services.AddScoped<HallService>();
+builder.Services.AddScoped<PurchaseService>();
+builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<TicketService>();
 
 var app = builder.Build();
 
@@ -17,6 +35,7 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.MapControllers();
 
 app.UseStaticFiles();
 app.UseAntiforgery();
