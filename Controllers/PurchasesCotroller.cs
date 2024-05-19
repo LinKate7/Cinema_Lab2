@@ -31,7 +31,7 @@ namespace Lab2OOP.Controllers
 
             if (purchase == null)
             {
-                return NotFound();
+                return NotFound(new { message = "Purchase not found" });
             }
 
             return purchase;
@@ -56,7 +56,11 @@ namespace Lab2OOP.Controllers
         public async Task<ActionResult<PurchaseDto>> PostPurchase(PurchaseDto purchaseDto)
         {
             var createdPurchase = await _purchaseService.CreatePurchaseAsync(purchaseDto);
-            var createdPurchaseDto = _purchaseService.MapToPurchaseDtoAsync(createdPurchase);
+            if (createdPurchase == null)
+            {
+                return NotFound("Film or Hall not found.");
+            }
+            var createdPurchaseDto = await _purchaseService.MapToPurchaseDtoAsync(createdPurchase);
 
             return CreatedAtAction("GetPurchase", new { id = createdPurchase.Id }, createdPurchaseDto);
         }

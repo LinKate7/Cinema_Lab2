@@ -16,6 +16,7 @@ namespace Lab2OOP.Services
 		{
 			return new HallDto
             {
+				Id = hall.Id,
                 Name = hall.Name,
                 Capacity = hall.Capacity
             };

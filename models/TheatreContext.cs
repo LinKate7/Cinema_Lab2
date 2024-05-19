@@ -1,4 +1,3 @@
-using Lab2OOP.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -13,7 +12,6 @@ public class TheatreContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
     public DbSet<Hall> Halls { get; set; } = default!;
     public DbSet<Purchase> Purchases { get; set; } = default!;
     public DbSet<Ticket> Tickets { get; set; } = default!;
-    //public DbSet<PurchaseTicket> PurchaseTickets { get; set; } = default!; // Include the junction table
 
     public TheatreContext(DbContextOptions<TheatreContext> options)
         : base(options)

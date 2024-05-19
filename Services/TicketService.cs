@@ -1,6 +1,7 @@
 ﻿using Lab2OOP.DTO;
 using Lab2OOP.models;
 using Microsoft.EntityFrameworkCore;
+using Lab2OOP.DateTimeExtension;
 
 namespace Lab2OOP.Services
 {
@@ -22,13 +23,16 @@ namespace Lab2OOP.Services
                 return null;
             }
 
-            return new TicketDto
+            var ticketDto = new TicketDto
             {
-                FilmTitle = film.Title,
-                HallName = hall.Name,
+                Id = ticket.Id,
+                FilmId= film.Id,
+                HallId = hall.Id,
                 Price = ticket.Price,
-                ShowTime = ticket.ShowTime
+                ShowTime = DateTimeExtensions.DateTimeToUnixTimestamp(ticket.ShowTime)//changed
             };
+
+            return ticketDto;
         }
 
         public async Task<IEnumerable<TicketDto>> GetTicketsAsync()
@@ -45,20 +49,12 @@ namespace Lab2OOP.Services
 
         public async Task<Ticket?> CreateTicketAsync(TicketDto ticketDto)
         {
-            var film = await _context.Films.FirstOrDefaultAsync(f => f.Title == ticketDto.FilmTitle);
-            var hall = await _context.Halls.FirstOrDefaultAsync(h => h.Name == ticketDto.HallName);
-
-
-            if (film == null || hall == null)
-            {
-                return null;
-            }
             var ticket = new Ticket
             {
-                FilmId = film.Id,
-                HallId = hall.Id,
+                FilmId = ticketDto.FilmId,
+                HallId = ticketDto.HallId,
                 Price = ticketDto.Price,
-                ShowTime = ticketDto.ShowTime
+                ShowTime = DateTimeExtensions.UnixTimeStampToDateTime(ticketDto.ShowTime)  //changed
             };
 
             _context.Tickets.Add(ticket);
@@ -75,19 +71,11 @@ namespace Lab2OOP.Services
             {
                 return false;
             }
-            var film = await _context.Films.FirstOrDefaultAsync(f => f.Title == ticketDto.FilmTitle);
-            var hall = await _context.Halls.FirstOrDefaultAsync(h => h.Name == ticketDto.HallName);
-
-
-            if (film == null || hall == null)
-            {
-                return false;
-            }
-
-            ticket.FilmId = film.Id;
-            ticket.HallId = hall.Id;
+   
+            ticket.FilmId = ticketDto.FilmId;
+            ticket.HallId = ticketDto.HallId;
             ticket.Price = ticketDto.Price;
-            ticket.ShowTime = ticketDto.ShowTime;
+            ticket.ShowTime = DateTimeExtensions.UnixTimeStampToDateTime(ticketDto.ShowTime); //changed
 
             try
             {

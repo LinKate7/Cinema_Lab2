@@ -1,40 +1,50 @@
 ﻿using Lab2OOP.DTO;
 using Lab2OOP.models;
 using Microsoft.EntityFrameworkCore;
+using Lab2OOP.DateTimeExtension;
 
 namespace Lab2OOP.Services
 {
-	public class PurchaseService
-	{
+    public class PurchaseService
+    {
         private readonly TheatreContext _context;
 
-		public PurchaseService(TheatreContext context)
-		{
+        public PurchaseService(TheatreContext context)
+        {
             _context = context;
+        }
+        private async Task<TicketDto> MapToTicketDtoAsync(Ticket ticket)
+        {
+            return new TicketDto
+            {
+                Id = ticket.Id,
+                FilmId = ticket.FilmId,
+                HallId = ticket.HallId,
+                Price = ticket.Price,
+                ShowTime = DateTimeExtensions.DateTimeToUnixTimestamp(ticket.ShowTime) //changed
+            };
         }
 
         public async Task<PurchaseDto> MapToPurchaseDtoAsync(Purchase purchase)
         {
             var ticketDtos = new List<TicketDto>();
-            var ticketIds = new List<Ticket>(); // just a placeholder
 
-            foreach (var ticketId in ticketIds)
+            var tickets = await _context.Tickets
+                .Where(t => t.Purchases.Any(p => p.Id == purchase.Id))
+                .ToListAsync();
+
+            foreach (var ticket in tickets)
             {
-                var ticket = await _context.Tickets.FindAsync(ticketId);
-                if (ticket != null)
+                var ticketDto = await MapToTicketDtoAsync(ticket);
+                if (ticketDto != null)
                 {
-                    ticketDtos.Add(new TicketDto
-                    {
-                        FilmTitle = ticket.Film.Title,
-                        HallName = ticket.Hall.Name,
-                        Price = ticket.Price,
-                        ShowTime = ticket.ShowTime
-                    });
+                    ticketDtos.Add(ticketDto);
                 }
             }
 
             return new PurchaseDto
             {
+                Id = purchase.Id,
                 UserId = purchase.UserId,
                 Tickets = ticketDtos
             };
@@ -43,8 +53,15 @@ namespace Lab2OOP.Services
         public async Task<IEnumerable<PurchaseDto>> GetPurchasesAsync()
         {
             var purchases = await _context.Purchases.ToListAsync();
+            var purchaseDtos = new List<PurchaseDto>();
 
-            return (IEnumerable<PurchaseDto>)purchases.Select(purchase => MapToPurchaseDtoAsync(purchase));
+            foreach (var purchase in purchases)
+            {
+                var purchaseDto = await MapToPurchaseDtoAsync(purchase);
+                purchaseDtos.Add(purchaseDto);
+            }
+
+            return purchaseDtos;
         }
 
         public async Task<PurchaseDto> GetPurchaseAsync(Guid id)
@@ -65,25 +82,13 @@ namespace Lab2OOP.Services
 
             foreach (var ticketDto in purchaseDto.Tickets)
             {
-               
-                var film = await _context.Films.FirstOrDefaultAsync(f => f.Title == ticketDto.FilmTitle);
-                if (film == null)
-                {
-                    continue; // Skip adding this ticket
-                }
-
-                var hall = await _context.Halls.FirstOrDefaultAsync(h => h.Name == ticketDto.HallName);
-                if (hall == null)
-                {
-                    continue;
-                }
 
                 var ticket = new Ticket
                 {
-                    FilmId = film.Id,
-                    HallId = hall.Id,
+                    FilmId = ticketDto.FilmId,
+                    HallId = ticketDto.HallId,
                     Price = ticketDto.Price,
-                    ShowTime = ticketDto.ShowTime
+                    ShowTime = DateTimeExtensions.UnixTimeStampToDateTime(ticketDto.ShowTime) //changed
                 };
 
                 tickets.Add(ticket);
@@ -116,25 +121,14 @@ namespace Lab2OOP.Services
 
             foreach (var ticketDto in purchaseDto.Tickets)
             {
-                var film = await _context.Films.FirstOrDefaultAsync(f => f.Title == ticketDto.FilmTitle);
-                if (film == null)
-                {
-                    continue;
-                }
-                var hall = await _context.Halls.FirstOrDefaultAsync(h => h.Name == ticketDto.HallName);
-                if (hall == null)
-                {
-                    continue;
-                }
-
-                var existingTicket = existingPurchase.Tickets.FirstOrDefault(t => t.FilmId == film.Id && t.HallId == hall.Id);
+                var existingTicket = existingPurchase.Tickets.FirstOrDefault(t => t.FilmId == ticketDto.FilmId && t.HallId == ticketDto.HallId);
                 if (existingTicket == null)
                 {
                     continue;
                 }
 
                 existingTicket.Price = ticketDto.Price;
-                existingTicket.ShowTime = ticketDto.ShowTime;
+                existingTicket.ShowTime = DateTimeExtensions.UnixTimeStampToDateTime(ticketDto.ShowTime); //changed
             }
 
             try
@@ -151,12 +145,19 @@ namespace Lab2OOP.Services
         public async Task<bool> DeletePurchaseAsync(Guid Id)
         {
             var purchase = await _context.Purchases.FirstOrDefaultAsync(p => p.Id == Id);
+            var tickets = await _context.Tickets
+                .Where(t => t.Purchases.Any(p => p.Id == Id))
+                .ToListAsync();
 
             if (purchase == null)
             {
                 return false;
             }
 
+            foreach(var ticket in tickets)
+            {
+                _context.Tickets.Remove(ticket);
+            }
             _context.Purchases.Remove(purchase);
             await _context.SaveChangesAsync();
 
@@ -164,4 +165,3 @@ namespace Lab2OOP.Services
         }
     }
 }
-

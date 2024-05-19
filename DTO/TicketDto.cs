@@ -2,10 +2,11 @@
 {
 	public class TicketDto
 	{
-        public string FilmTitle { get; set; }
-        public string HallName { get; set; }
+        public Guid Id { get; set; }
+        public Guid FilmId { get; set; }
+        public Guid HallId { get; set; }
         public Decimal Price { get; set; }
-        public DateTime ShowTime { get; set; }
+        public long ShowTime { get; set; } //unix timestamp
     }
 }
 

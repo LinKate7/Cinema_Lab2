@@ -16,6 +16,7 @@ namespace Lab2OOP.Services
         {
             return new UserDto
             {
+                Id = user.Id,
                 Name = user.Name,
                 Surname = user.Surname
             };

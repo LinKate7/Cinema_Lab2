@@ -1,6 +1,7 @@
 ﻿using Lab2OOP.DTO;
 using Lab2OOP.models;
 using Microsoft.EntityFrameworkCore;
+using Lab2OOP.DateTimeExtension;
 
 namespace Lab2OOP.Services
 {
@@ -17,6 +18,7 @@ namespace Lab2OOP.Services
         {
             var genreDto = new GenreDto
             {
+                Id = genre.Id,
                 Name = genre.Name
             };
 
@@ -26,8 +28,9 @@ namespace Lab2OOP.Services
             {
                 var filmDtos = films.Select(f => new FilmDto
                 {
+                    Id = f.Id,
                     Title = f.Title,
-                    Year = f.Year,
+                    Year = DateTimeExtensions.DateTimeToUnixTimestamp(f.Year),
                     GenreName = genre.Name
                 }).ToList();
 

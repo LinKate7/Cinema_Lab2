@@ -1,6 +1,7 @@
 ﻿using Lab2OOP.DTO;
 using Lab2OOP.models;
 using Microsoft.EntityFrameworkCore;
+using Lab2OOP.DateTimeExtension;
 
 namespace Lab2OOP.Services
 {
@@ -18,8 +19,9 @@ namespace Lab2OOP.Services
 
 			return new FilmDto
 			{
+				Id = film.Id,
 				Title = film.Title,
-				Year = film.Year,
+				Year = DateTimeExtensions.DateTimeToUnixTimestamp(film.Year),
 				GenreName = genre != null ? genre.Name : null
 
             };
@@ -64,7 +66,7 @@ namespace Lab2OOP.Services
             var film = new Film
 			{
 				Title = filmDto.Title,
-				Year = filmDto.Year,
+				Year = DateTimeExtensions.UnixTimeStampToDateTime(filmDto.Year),
 				GenreId = genre.Id
 			};
             _context.Films.Add(film);
@@ -89,8 +91,8 @@ namespace Lab2OOP.Services
 				return false;
 			}
 
-			existingFilm.Title = filmDto.Title;
-			existingFilm.Year = filmDto.Year;
+            existingFilm.Title = filmDto.Title;
+			existingFilm.Year = DateTimeExtensions.UnixTimeStampToDateTime(filmDto.Year);
 			existingFilm.GenreId = genre.Id;
 
             try

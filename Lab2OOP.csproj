@@ -31,10 +31,12 @@
       <None Remove="Controllers\" />
       <None Remove="DTO\" />
       <None Remove="Services\" />
+      <None Remove="DateTimeExtension\" />
     </ItemGroup>
     <ItemGroup>
       <Folder Include="Controllers\" />
       <Folder Include="DTO\" />
       <Folder Include="Services\" />
+      <Folder Include="DateTimeExtension\" />
     </ItemGroup>
 </Project>

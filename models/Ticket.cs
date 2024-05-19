@@ -9,8 +9,9 @@ public class Ticket : BaseModel
     [ForeignKey("Hall")]
     public Guid HallId { get; set; }
     public Decimal Price { get; set; }
-    public DateTime ShowTime { get; set; }
+    public DateTime ShowTime { get; set; } 
     public Film Film { get; set; }
     public Hall Hall { get; set; }
     public ICollection<Purchase> Purchases { get; set; }
+
 }

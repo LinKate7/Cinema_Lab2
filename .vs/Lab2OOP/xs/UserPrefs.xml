@@ -2,32 +2,26 @@
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workbench ActiveDocument="Services/GenreService.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Services/TicketService.cs">
     <Files>
-      <File FileName="models/Film.cs" Line="7" Column="5" />
-      <File FileName="models/Genre.cs" Line="6" Column="29" />
-      <File FileName="models/Hall.cs" />
-      <File FileName="models/Purchase.cs" />
-      <File FileName="models/Ticket.cs" />
-      <File FileName="models/User.cs" />
-      <File FileName="Controllers/GenresController.cs" Line="17" Column="42" />
-      <File FileName="Program.cs" />
-      <File FileName="models/BaseModel.cs" />
-      <File FileName="DTO/GenreDto.cs" Line="7" Column="49" />
-      <File FileName="DTO/FilmDto.cs" Line="1" Column="1" />
-      <File FileName="Services/GenreService.cs" Line="1" Column="15" />
+      <File FileName="Models/Film.cs" />
+      <File FileName="Models/Ticket.cs" />
+      <File FileName="Models/User.cs" />
+      <File FileName="DTO/PurchaseDto.cs" />
+      <File FileName="Services/PurchaseService.cs" />
+      <File FileName="Controllers/GenresController.cs" />
+      <File FileName="DTO/GenreDto.cs" />
+      <File FileName="Services/GenreService.cs" />
+      <File FileName="DTO/HallDto.cs" />
+      <File FileName="DTO/TicketDto.cs" />
+      <File FileName="Controllers/TicketsController.cs" />
+      <File FileName="Services/TicketService.cs" Line="86" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="Lab2OOP" expanded="True">
-            <Node name="Lab2OOP">
-              <Node name="DTO" expanded="True" />
-              <Node name="Migrations" expanded="True" />
-              <Node name="models" expanded="True" selected="True" />
-              <Node name="Services" expanded="True" />
-              <Node name="appsettings.json" expanded="True" />
-            </Node>
+          <Node name="Lab2OOP">
+            <Node name="Lab2OOP" expanded="True" />
           </Node>
         </State>
       </Pad>
