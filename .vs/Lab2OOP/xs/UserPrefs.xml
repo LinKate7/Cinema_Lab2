@@ -1,34 +1,40 @@
 ﻿<Properties StartupConfiguration="{7229F8E9-BD2B-43E0-B93B-DB93C68FBEDC}|https">
+  <MonoDevelop.Ide.ItemProperties.Lab2OOP PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workbench ActiveDocument="Services/TicketService.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Services/FilmService.cs">
     <Files>
-      <File FileName="Models/Film.cs" />
-      <File FileName="Models/Ticket.cs" />
-      <File FileName="Models/User.cs" />
-      <File FileName="DTO/PurchaseDto.cs" />
-      <File FileName="Services/PurchaseService.cs" />
-      <File FileName="Controllers/GenresController.cs" />
+      <File FileName="Controllers/UsersController.cs" />
+      <File FileName="Services/UserService.cs" Line="1" Column="1" />
+      <File FileName="wwwroot/index.html" Line="22" Column="72" />
+      <File FileName="wwwroot/js/lab2.js" Line="128" Column="5" />
       <File FileName="DTO/GenreDto.cs" />
-      <File FileName="Services/GenreService.cs" />
-      <File FileName="DTO/HallDto.cs" />
-      <File FileName="DTO/TicketDto.cs" />
-      <File FileName="Controllers/TicketsController.cs" />
-      <File FileName="Services/TicketService.cs" Line="86" Column="1" />
+      <File FileName="DTO/FilmDto.cs" Line="1" Column="1" />
+      <File FileName="Models/Film.cs" />
+      <File FileName="Controllers/FilmsController.cs" Line="92" Column="72" />
+      <File FileName="Services/FilmService.cs" Line="127" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="Lab2OOP">
-            <Node name="Lab2OOP" expanded="True" />
+            <Node name="Lab2OOP">
+              <Node name="Controllers" expanded="True" />
+              <Node name="DateTimeExtension" expanded="True" />
+              <Node name="Services" expanded="True">
+                <Node name="FilmService.cs" selected="True" />
+              </Node>
+              <Node name="wwwroot" expanded="True">
+                <Node name="js" expanded="True" />
+              </Node>
+            </Node>
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.Lab2OOP PreferredExecutionTarget="/Applications/Google Chrome.app" />
 </Properties>

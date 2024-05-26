@@ -15,6 +15,7 @@ namespace Lab2OOP
             _filmService = filmService;
         }
 
+
         // GET: api/Films
         [HttpGet]
         public async Task<ActionResult<IEnumerable<FilmDto>>> GetFilms()
@@ -83,6 +84,14 @@ namespace Lab2OOP
             }
 
             return NoContent();
+        }
+
+        [HttpGet("search")]
+        public async Task<ActionResult<FilmDto>> SearchFilmByName(string name)
+        {
+            var film = await _filmService.SearchFilmsByNameAsync(name);
+            return Ok(film);
+            
         }
 
     }

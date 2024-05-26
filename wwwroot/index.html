@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Cinema</title>
+    <link rel="stylesheet" href="css/site.css" />
+</head>
+<body>
+    <h1>Cinema</h1>
+    <h3>Add Film</h3>
+    <form action="javascript:void(0);" method="POST"
+          onsubmit="addFilm()">
+        <input type="text" id="add-title" placeholder="Title">
+        <input type="number" id="add-year" placeholder="Year">
+        <input type="text" id="add-genre" placeholder="Genre">
+        <input type="submit" value="Add">
+    </form>
+
+    <h3>Search Film</h3>
+    <input type="text" id="search-name" placeholder="Enter film name">
+    <button onclick="searchFilm()">Search</button>
+    <button id="cancel-search" onclick="cancelSearch()">Cancel</button>
+
+    <div id="editFilm">
+        <h3>Edit</h3>
+        <form action="javascript:void(0);" onsubmit="updateFilm()">
+            <input type="hidden" id="edit-id">
+            <input type="text" id="edit-title" placeholder="Title">
+            <input type="number" id="edit-year" placeholder="Year">
+            <input type="text" id="edit-genre" placeholder="Genre">
+            <input type="submit" value="Save">
+            <a onclick="closeInput()" arialabel="Close">&#10006;</a>
+        </form>
+    </div>
+    <p id="counter"></p>
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Year</th>
+            <th>Genre</th>
+            <th>Actions
+            <th>
+        </tr>
+        <tbody id="films"></tbody>
+    </table>
+    <script src="js/lab2.js" asp-append-version="true"></script>
+    <script type="text/javascript">getFilms();</script>
+</body>
+</html>

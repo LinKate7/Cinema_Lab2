@@ -34,13 +34,12 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.UseDefaultFiles();
+app.UseStaticFiles();
+
 app.UseHttpsRedirection();
 app.MapControllers();
 
-app.UseStaticFiles();
 app.UseAntiforgery();
-
-app.MapRazorComponents<App>()
-    .AddInteractiveServerRenderMode();
 
 app.Run();

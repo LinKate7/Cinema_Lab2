@@ -120,6 +120,15 @@ namespace Lab2OOP.Services
 
 			return true;
         }
+        public async Task<FilmDto> SearchFilmsByNameAsync(string name)
+        {
+			var film = await _context.Films
+				.FirstOrDefaultAsync(f => f.Title == name);
+
+			var filmDTO = MapToFilmDto(film);
+
+            return filmDTO;
+        }
 
     }
 }
